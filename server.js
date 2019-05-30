@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 
 const comidas = [
     {
@@ -40,11 +41,12 @@ const comidas = [
 ]
 
 const servidor = express()
+servidor.use(cors())
 
 servidor.get("/comidas", (request, response) => {
-    response.send(comidas)
+    response.status(200).send(comidas)
 })
 
-servidor.listen(3000)
-
-console.log("servidorzinho rodando na porta 3000")
+servidor.listen(3000, function () {
+    console.log("servidorzinho rodando na porta 3000")
+})
