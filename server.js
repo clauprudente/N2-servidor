@@ -1,3 +1,5 @@
+const express = require('express')
+
 const comidas = [
     {
         "nome": "Batata frita",
@@ -37,29 +39,10 @@ const comidas = [
 
 ]
 
-const http = require('http')
+const servidor = express()
 
-const servidor = http.createServer((request, response) => {
-    if (request.url === '/') {
-        response.end("Hello Wonderful Word!")
-    } else if (request.url === "/comidas") {
-        if (request.method === 'GET') {
-            response.writeHead(200, {
-                "Content-Type": "application/json",
-                'Access-Control-Allow-Origin': '*'
-            })
-            response.write(
-                JSON.stringify(comidas))
-            response.end()
-
-        }
-        else if (request.method === 'POST') {
-            response.writeHead(201, {
-                "Content-Type": "text/html; charset=utf-8"
-            })
-            response.end("<h1>Respostão do POST</h1>")
-        }
-    }
+servidor.get("/comidas", (request, response) => {
+    response.send(comidas)
 })
 
 servidor.listen(3000)
