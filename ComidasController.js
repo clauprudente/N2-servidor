@@ -6,7 +6,7 @@ const getAll = () => {
 }
 
 const add = (comida) => {
-    getAll().id.pratosFavoritos = Math.random().toString(36).substr(-8);
+    comida.id = Math.random().toString(36).substr(-8);
     getAll().pratosFavoritos.push(comida)
     return comida;
 }
