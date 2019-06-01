@@ -18,5 +18,6 @@ const deleteComida = (id) => {
 
 module.exports = {
     getAll,
-    add
+    add,
+    deleteComida
 }
