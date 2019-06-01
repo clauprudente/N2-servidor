@@ -10,7 +10,11 @@ const add = (comida) => {
     getAll().pratosFavoritos.push(comida)
     return comida;
 }
-
+const deleteComida = (id) => {
+    getAll().pratosFavoritos = getAll().pratosFavoritos.filter((comida) => {
+        return comida.id !== id;
+    })
+}
 
 module.exports = {
     getAll,
