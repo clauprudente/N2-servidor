@@ -16,6 +16,11 @@ servidor.post("/comidas", bodyParser.json(), (request, response) => {
     response.sendStatus(201)
 })
 
+servidor.delete('/comidas/:id', (request, response) => {
+    controller.deleteComida(request.params.id)
+    response.sendStatus(204)
+})
+
 servidor.listen(3000, function () {
     console.log("servidorzinho rodando na porta 3000")
 })
