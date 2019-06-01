@@ -6,10 +6,11 @@ const getAll = () => {
 }
 
 const add = (comida) => {
-    getAll().id = Math.random().toString(36).substr(-8);
+    getAll().id.pratosFavoritos = Math.random().toString(36).substr(-8);
     getAll().pratosFavoritos.push(comida)
     return comida;
 }
+
 const deleteComida = (id) => {
     getAll().pratosFavoritos = getAll().pratosFavoritos.filter((comida) => {
         return comida.id !== id;
