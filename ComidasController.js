@@ -17,8 +17,8 @@ const deleteComida = (id) => {
 }
 
 const update = (id, comida) => {
-    let comidaCadastrada = getAll().find(comida => {
-        return comida.id === id
+    let comidaCadastrada = getAll().pratosFavoritos.find(item => {
+        return item.id === id
     })
 
     if (comida.nome) {
