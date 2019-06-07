@@ -1,6 +1,5 @@
-const comidas = {
-    pratosFavoritos: []
-}
+const { comidas } = require('./ComidasRepository')
+
 const getAll = () => {
     return comidas;
 }
@@ -17,8 +16,22 @@ const deleteComida = (id) => {
     })
 }
 
+const update = (id, comida) => {
+    let comidaCadastrada = getAll().find(comida => {
+        return comida.id === id
+    })
+
+    if (comida.nome) {
+        comidaCadastrada.nome = comida.nome;
+    }
+    if (comida.descricao) {
+        comidaCadastrada.descricao = comida.descricao;
+    }
+}
+
 module.exports = {
     getAll,
     add,
-    deleteComida
+    deleteComida,
+    update
 }
