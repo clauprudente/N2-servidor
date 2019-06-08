@@ -21,12 +21,21 @@ const update = (id, comida) => {
         return item.id === id
     })
 
-    if (comida.nome) {
-        comidaCadastrada.nome = comida.nome;
+    if (comidaCadastrada === undefined) return false;
+
+    // if (comida.nome) comidaCadastrada.nome = comida.nome;
+
+    // if (comida.descricao) comidaCadastrada.descricao = comida.descricao;
+
+    const comidaAtualizada = {
+        ...comidaCadastrada,
+        ...comida
     }
-    if (comida.descricao) {
-        comidaCadastrada.descricao = comida.descricao;
-    }
+
+    deleteComida(id)
+    getAll().pratosFavoritos.push(comidaAtualizada)
+
+    return true;
 }
 
 module.exports = {

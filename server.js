@@ -6,13 +6,12 @@ const controller = require('./ComidasController.js')
 
 const servidor = express()
 servidor.use(cors())
-servidor.use(bodyParser.json())
 
 servidor.get("/comidas", (request, response) => {
     response.status(200).send(controller.getAll())
 })
 
-servidor.post("/comidas", (request, response) => {
+servidor.post("/comidas", bodyParser.json(), (request, response) => {
     controller.add(request.body)
     response.sendStatus(201)
 })
@@ -22,10 +21,10 @@ servidor.delete('/comidas/:id', (request, response) => {
     response.sendStatus(204)
 })
 
-servidor.patch('/comidas/:id', (request, response) => {
+servidor.patch('/comidas/:id', bodyParser.json(), (request, response) => {
     const id = request.params.id;
-    controller.update(id, request.body)
-    response.sendStatus(200)
+    const sucesso = controller.update(id, request.body);
+    (sucesso) ? response.sendStatus(204) : response.sendStatus(404);
 })
 
 servidor.put('/comidas/:id', (request, response) => {
