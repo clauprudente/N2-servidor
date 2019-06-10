@@ -1,4 +1,6 @@
-const { comidas } = require('./ComidasRepository')
+const { connect } = require('./ComidasRepository')
+
+connect()
 
 const getAll = () => {
     return comidas;
