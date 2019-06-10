@@ -6,9 +6,15 @@ const controller = require('./ComidasController.js')
 
 const servidor = express()
 servidor.use(cors())
+servidor.use(bodyParser.json())
 
 servidor.get("/comidas", (request, response) => {
     response.status(200).send(controller.getAll())
+})
+
+servidor.get("/comidas/:id", (request, response) => {
+    const id = request.params.id
+    response.status(200).send(controller.getById(id));
 })
 
 servidor.post("/comidas", bodyParser.json(), (request, response) => {

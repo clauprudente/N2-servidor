@@ -4,6 +4,13 @@ const getAll = () => {
     return comidas;
 }
 
+const getById = (id) => {
+    const comidaById = getAll().pratosFavoritos.find(comida => {
+        return comida.id === id;
+    })
+    return comidaById;
+}
+
 const add = (comida) => {
     comida.id = Math.random().toString(36).substr(-8);
     getAll().pratosFavoritos.push(comida)
@@ -42,5 +49,6 @@ module.exports = {
     getAll,
     add,
     deleteComida,
-    update
+    update,
+    getById
 }
