@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 //string de conexão
 //mongodb://dominio:porta/nome_database
 const MONGO_URL = "mongodb://localhost:27017/reprograma"
@@ -15,4 +16,8 @@ function connect() {
         });
 }
 
-module.exports = { connect }
+function close() {
+
+}
+
+module.exports = { connect, close }

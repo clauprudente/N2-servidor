@@ -1,22 +1,27 @@
 const { connect } = require('./ComidasRepository')
+const { comidasModel } = require('./ComidasSchema')
+connect();
 
-connect()
-
-const getAll = () => {
-    return comidas;
+const getAll = async () => {
+    return comidasModel.find((erro, comidas) => {
+        if (erro) {
+            console.error(erro)
+        }
+        return comidas;
+    })
 }
 
 const getById = (id) => {
-    const comidaById = getAll().pratosFavoritos.find(comida => {
-        return comida.id === id;
-    })
-    return comidaById;
+    return comidasModel.findById(
+        id, (error, comida) => {
+            return comida;
+        }
+    )
 }
 
 const add = (comida) => {
-    comida.id = Math.random().toString(36).substr(-8);
-    getAll().pratosFavoritos.push(comida)
-    return comida;
+    const novaComida = new comidasModel(comida)
+    novaComida.save()
 }
 
 const deleteComida = (id) => {
