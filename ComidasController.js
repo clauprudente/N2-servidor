@@ -11,10 +11,11 @@ const getAll = async () => {
     })
 }
 
-const getById = (id) => {
+const getById = async (id) => {
     return comidasModel.findById(
-        id, (error, comida) => {
-            return comida;
+        id,
+        (error, comida) => {
+            return comida
         }
     )
 }
