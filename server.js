@@ -13,9 +13,10 @@ servidor.get("/comidas", async (request, response) => {
         .then(comidas => response.send(comidas))
 })
 
-servidor.get("/comidas/:id", (request, response) => {
-    controller.getById(request.params.id)
-        .then(comidas => response.send(comidas))
+servidor.get('/comidas/:id', async (request, response) => {
+    const id = request.params.id
+    controller.getById(id)
+        .then(comida => response.send(comida))
 })
 
 servidor.post("/comidas", (request, response) => {
