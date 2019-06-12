@@ -26,9 +26,7 @@ const add = (comida) => {
 }
 
 const deleteComida = (id) => {
-    getAll().pratosFavoritos = getAll().pratosFavoritos.filter((comida) => {
-        return comida.id !== id;
-    })
+    return comidasModel.findByIdAndDelete(id)
 }
 
 const update = (id, comida) => {
