@@ -29,26 +29,15 @@ const deleteComida = (id) => {
     return comidasModel.findByIdAndDelete(id)
 }
 
-const update = (id, comida) => {
-    let comidaCadastrada = getAll().pratosFavoritos.find(item => {
-        return item.id === id
-    })
-
-    if (comidaCadastrada === undefined) return false;
-
-    // if (comida.nome) comidaCadastrada.nome = comida.nome;
-
-    // if (comida.descricao) comidaCadastrada.descricao = comida.descricao;
-
-    const comidaAtualizada = {
-        ...comidaCadastrada,
-        ...comida
-    }
-
-    deleteComida(id)
-    getAll().pratosFavoritos.push(comidaAtualizada)
-
-    return true;
+const update = async (id, comida) => {
+    return comidasModel.findByIdAndUpdate(
+        id,
+        { $set: comida },
+        { new: true }, // RETORNAR A COMIDA JA ATUALIZADA NO CALLBACK
+        function (error, comida) { // é o nosso callback
+            return comida
+        }
+    )
 }
 
 module.exports = {
