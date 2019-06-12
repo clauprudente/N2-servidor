@@ -24,10 +24,11 @@ servidor.post("/comidas", (request, response) => {
     response.sendStatus(201)
 })
 
-servidor.delete('/comidas/:id', (request, response) => {
-    controller.deleteComida(request.params.id)
-    response.sendStatus(204)
+servidor.delete('/comidas/:id', async (request, response) => {
+    controller.remove(request.params.id)
+        .then(comida => response.sendStatus(204))
 })
+
 
 servidor.patch('/comidas/:id', (request, response) => {
     const id = request.params.id;
