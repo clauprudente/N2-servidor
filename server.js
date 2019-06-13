@@ -65,7 +65,19 @@ servidor.patch('/comidas/:id', (request, response) => {
 
 servidor.delete('/comidas/:id', async (request, response) => {
     controller.deleteComida(request.params.id)
-        .then(comida => response.sendStatus(204))
+        .then(comida => {
+            if (comida) {
+                response.sendStatus(204)
+            }
+            else {
+                response.sendStatus(404)
+            }
+        })
+
+        .catch(error => {
+            response.sendStatus(500);
+        })
+
 })
 
 servidor.listen(3000, function () {
