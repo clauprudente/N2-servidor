@@ -23,10 +23,20 @@ servidor.post('/comidas', (request, response) => {
     response.status(200).send(controller.add(request.body))
 })
 
-servidor.patch('/comidas/:id', async (request, response) => {
+servidor.patch('/comidas/:id', (request, response) => {
     const id = request.params.id
     controller.update(id, request.body)
-        .then(response.sendStatus(204))
+        .then(comida => {
+            if (!comida) { response.sendStatus(404) } // nao encontrei a comida
+            else { response.send(comida) } // o status default 200
+        })
+        .catch(error => {
+            if (error.name === "MongoError" || error.name === "CastError") {
+                response.sendStatus(400) // bad request
+            } else {
+                response.sendStatus(500)
+            }
+        })
 })
 
 servidor.delete('/comidas/:id', async (request, response) => {
