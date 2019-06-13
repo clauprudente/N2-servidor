@@ -3,11 +3,8 @@ const { comidasModel } = require('./ComidasSchema')
 connect();
 
 const getAll = async () => {
-    return comidasModel.find((erro, comidas) => {
-        if (erro) {
-            console.error(erro)
-        }
-        return comidas;
+    return comidasModel.find((error, comidas) => {
+        return comidas
     })
 }
 
