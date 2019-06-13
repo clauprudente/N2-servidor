@@ -13,10 +13,23 @@ servidor.get("/comidas", async (request, response) => {
         .then(comidas => response.send(comidas))
 })
 
-servidor.get('/comidas/:id', async (request, response) => {
+servidor.get('/comidas/:id', (request, response) => {
     const id = request.params.id
     controller.getById(id)
-        .then(comida => response.send(comida))
+        .then(comida => {
+            if (!comida) { // comida === null || comida === undefined
+                response.sendStatus(404) // comida nao encontrada
+            } else {
+                response.send(comida) // Status default é 200
+            }
+        })
+        .catch(error => {
+            if (error.name === "CastError") {
+                response.sendStatus(400) // bad request - tem algum parametro errado
+            } else {
+                response.sendStatus(500) // deu ruim, e nao sabemos oq foi
+            }
+        })
 })
 
 servidor.post('/comidas', (request, response) => {
