@@ -41,7 +41,7 @@ servidor.post('/comidas', (request, response) => {
         })
         .catch(error => {
             if (error.name === "ValidationError") {
-                response.sendStatus(500)
+                response.sendStatus(400) // bad request
             }
         })
     // response.status(200).send(controller.add(request.body))
