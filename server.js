@@ -33,7 +33,18 @@ servidor.get('/comidas/:id', (request, response) => {
 })
 
 servidor.post('/comidas', (request, response) => {
-    response.status(200).send(controller.add(request.body))
+    controller.add(request.body)
+        .then(comida => {
+            if (comida.nome) {
+                response.send(comida.id)
+            }
+        })
+        .catch(error => {
+            if (error.name === "ValidationError") {
+                response.sendStatus(500)
+            }
+        })
+    // response.status(200).send(controller.add(request.body))
 })
 
 servidor.patch('/comidas/:id', (request, response) => {
